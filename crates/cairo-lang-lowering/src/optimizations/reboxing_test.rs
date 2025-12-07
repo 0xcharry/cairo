@@ -26,13 +26,7 @@ fn test_reboxing_analysis(
 ) -> TestRunnerResult {
     debug!("Running {}", inputs["test_name"]);
     let db = &mut LoweringDatabaseForTesting::default();
-    let (test_function, semantic_diagnostics) = setup_test_function(
-        db,
-        inputs["function"].as_str(),
-        inputs["function_name"].as_str(),
-        inputs.get("module_code").map(|s| s.as_str()).unwrap_or(""),
-    )
-    .split();
+    let (test_function, semantic_diagnostics) = setup_test_function(db, inputs).split();
 
     let function_id =
         ConcreteFunctionWithBodyId::from_semantic(db, test_function.concrete_function_id);

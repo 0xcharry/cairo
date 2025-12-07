@@ -15,7 +15,7 @@ struct A {
     b: felt252,
 }
 
-//! > function
+//! > function_code
 fn main(a: A) -> Box<felt252> {
     let ba = BoxTrait::new(a);
     let b = ba.b;
@@ -71,7 +71,7 @@ struct Point {
     z: u32,
 }
 
-//! > function
+//! > function_code
 fn multi_member(p: Point) -> (Box<u32>, Box<u32>) {
     let bp = BoxTrait::new(p);
     let x = bp.x;
@@ -140,7 +140,7 @@ struct Outer {
     other: felt252,
 }
 
-//! > function
+//! > function_code
 fn nested_struct(o: Outer) -> Box<Inner> {
     let bo = BoxTrait::new(o);
     let inner = bo.inner;
@@ -195,7 +195,7 @@ struct Data {
     b: felt252,
 }
 
-//! > function
+//! > function_code
 fn with_snapshot(d: @Data) -> Box<felt252> {
     let bd = BoxTrait::new(*d);
     let a = bd.a;
@@ -250,7 +250,7 @@ struct Simple {
     value: felt252,
 }
 
-//! > function
+//! > function_code
 fn rebox_whole(s: Simple) -> Box<Simple> {
     let bs = BoxTrait::new(s);
     let s2 = bs.unbox();
@@ -303,7 +303,7 @@ struct Data {
     b: felt252,
 }
 
-//! > function
+//! > function_code
 fn no_opportunity(d: Data, x: felt252) -> Box<felt252> {
     let bd = BoxTrait::new(d);
     let _unused = bd.a;
@@ -351,7 +351,7 @@ enum MyEnum {
     B: u32,
 }
 
-//! > function
+//! > function_code
 fn enum_rebox(e: MyEnum) -> Box<u32> {
     let be = BoxTrait::new(e);
     let a = match be.unbox() {
@@ -440,7 +440,7 @@ tuple_rebox
 //! > module_code
 use core::box::BoxTrait;
 
-//! > function
+//! > function_code
 fn tuple_rebox(t: (u32, felt252, u64)) -> Box<felt252> {
     let bt = BoxTrait::new(t);
     let (_, mid, _) = bt.unbox();
@@ -495,7 +495,7 @@ struct NonCopyStruct {
     val: felt252,
 }
 
-//! > function
+//! > function_code
 fn non_copy_struct_rebox(s: NonCopyStruct) -> Box<felt252> {
     let bs = BoxTrait::new(s);
     let unboxed = bs.unbox();
@@ -545,7 +545,7 @@ non_copy_tuple_rebox
 //! > module_code
 use core::box::BoxTrait;
 
-//! > function
+//! > function_code
 fn non_copy_tuple_rebox(t: (Array<felt252>, felt252)) -> Box<felt252> {
     let bt = BoxTrait::new(t);
     let unboxed = bt.unbox();
@@ -601,7 +601,7 @@ struct Pair {
     right: felt252,
 }
 
-//! > function
+//! > function_code
 fn branch_mut_unbox(flag: bool, p1: Pair, p2: Pair) -> Box<felt252> {
     let mut x = p1;
     if flag {
@@ -702,7 +702,7 @@ struct Pair {
     right: felt252,
 }
 
-//! > function
+//! > function_code
 fn loop_break_unbox(p: Pair) -> Box<felt252> {
     let mut x: Pair = p;
     loop {
